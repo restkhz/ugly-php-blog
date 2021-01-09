@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+    <title>{{site.title | e }}|{{post.title}}</title>
+
+    <link href="/assets/bulma-0.8.2/css/bulma.min.css" rel="stylesheet">
+    <link href="/assets/costum.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="icon" href="assets/psb.jpeg">
+
+  </head>
+  <body class="body">
+    <section class="hero is-black is-medium">
+
+      <div class="hero-head">
+
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+
+                <a role="button" class="navbar-burger burger  has-text-success" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                      <span aria-hidden="true"></span>
+                      <span aria-hidden="true"></span>
+                      <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-start">
+                  <a class="navbar-item">
+                    {{site.title}}
+                  </a>
+
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                      Category
+                    </a>
+
+                    <div class="navbar-dropdown">
+                      {% for category in categories %}
+                      <a class="navbar-item" href="{{category.url | e('js')}}">
+                        {{ category.name | e }}
+                      </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+
+              <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="buttons">
+                    <a class="button is-black">
+                      Log in
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+
+      </div>
+      <div class="hero-body has-shadow-down">
+        <div class="container has-text-centered">
+          <span class="title is-size-2-desktop is-size-4-touch" style="display:inline-block;"> #></span>
+          <h1 class="title is-size-2-desktop is-size-4-touch" style="display:inline-block;">{{site.title|e}}</h1>
+          <span id="blink" class="title is-size-2-desktop is-size-4-touch" style="display:inline-block;">_</span>
+          <h2 class="subtitle  is-size-6-touch">{{site.subtitle |e }}</h2>
+        </div>
+    </div>
+
+
+
+    </section>
+
+    <section id="posts">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-two-third">
+            <div class="card has-shadow-down">
+              <div class="card-content">
+                  <h1 class="title has-text-success">{{post.title | e}}</h1>
+                  <span><b>{{post.author | e }}</b></span>
+                  <span>{{post.create_time|date('d/m/Y')}}</span>
+                  <hr>
+                <div class="content has-text-light">
+                  {% autoescape false %}
+                  {{post.content_html}}
+                  {% endautoescape %}
+                </div>
+                  <hr>
+                  <p>views:{{post.views}}</p>
+              </div>
+              </div>
+          </div>
+
+          <div class="column is-one-third is-hidden-mobile">
+            <div class="card has-shadow-down">
+              <div class="card-header has-shadow-down">
+                <p class="card-header-title has-text-success is-size-5">Categories</p>
+              </div>
+              <div class="card-content">
+                {% for category in categories %}
+                <ul class="menu-list">
+                    <li>
+                      <a>{{category.name |e }}</a>
+                    </li>
+                </ul>
+                {% endfor %}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="comments">
+          <h2 class="is-size-4 title has-text-success">Comments</h2>
+          <hr>
+          {% if comments %}
+            {% for comment in comments %}
+              <div class="media">
+                <div class="media-content">
+                  <div class="content" id="{{comment.id}}">
+                    <p>
+                      <strong>{{comment.name}}:</strong>
+                      <br>
+                      {{comment.content | raw}}
+                      <br>
+                      <span><a href="#comment_text" onClick="return CommentQuote('{{comment.id}}','{{comment.name}}')">Reply</a></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+            {% endfor %}
+          {% endif %}
+
+          {% if not comments %}
+            <span class="is-size-5">(no comments...maybe you can be the first?)</span>
+          {% endif %}
+        </div>
+        <hr>
+        <div class="media">
+          <div class="media-content">
+            <form id="comment_form" class="" action="/post/postComment" method="post">
+              <div class="field">
+                <label class="label">Name</label>
+                <p class="control">
+                  <input id="comment_name" class="input" name="user" type="text" placeholder="(name required)"  required="required">
+                </p>
+              </div>
+              <div class="field">
+                <label class="label">Email(Won't be public)</label>
+                <p class="control">
+                  <input id="comment_email" class="input" name="email" type="text" placeholder="(email)">
+                </p>
+              </div>
+              <div class="field">
+                <label class="label">Yout website</label>
+                <p class="control">
+                  <input id="comment_site" class="input" name="site" type="text" placeholder="(not required)">
+                </p>
+              </div>
+            <div class="field">
+              <label class="label">Comment</label>
+              <p class="control">
+                <textarea id="comment_text" class="textarea" name="comment" placeholder="Add a comment :)"></textarea>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control">
+                <input type="submit" class="button" value="Post!"></input>
+              </p>
+            </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="hero is-dark has-shadow-up" id="footer">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h5 class="subtitle is-6 is-size-7-touch">Designed and developed by 休止千鹤 Copyright ©  2016-2020 restkhz.com</h6>
+        </div>
+    </div>
+    </section>
+
+    <script type="text/javascript" src="/assets/costum.js"></script>
+    <script type="text/javascript" src="/assets/comment.js"></script>
+
+  </body>
+</html>

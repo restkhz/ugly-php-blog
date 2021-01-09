@@ -1,0 +1,140 @@
+{% extends 'block_skeleton.html' %}
+
+{% block title %}
+{{post.title}} | {{site.title | e}}
+{% endblock %}
+
+{% block body %}
+<!--BLOCK_POST_START-->
+<section id="posts">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-two-third" style="overflow-wrap:break-world;overflow:hidden;">
+          <div class="card has-shadow-down">
+            <div class="card-content">
+                <h1 class="title has-text-success">{{post.title | e}}</h1>
+                <span>
+                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+                    <b>{{post.author | e }}</b>
+                </span>
+                &nbsp;|&nbsp;
+                <span>
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;
+                    {{post.create_time|date('d/m/Y')}}</span>
+                <hr>
+              <div class="content has-text-light">
+                {% autoescape false %}
+                {{post.content_html}}
+                {% endautoescape %}
+              </div>
+                <hr>
+                <p><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;views:{{post.views}}</p>
+                <img src="/viewscounter/postcount?pid={{post.pid}}&t=a" onerror="this.style.display='none'" width="1" height="1" alt="">
+
+            </div>
+            </div>
+        </div>
+
+        <div class="column is-one-third is-hidden-mobile">
+          <div class="card has-shadow-down" style="position: sticky;top: 3%;">
+            <div class="card-header has-shadow-down">
+              <p class="card-header-title has-text-success is-size-5"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Categories</p>
+            </div>
+            <div class="card-content">
+              {% for category in categories %}
+              <ul class="menu-list">
+                  <li>
+                    <a href="/categories/{{category.name}}">{{category.name |e }}</a>
+                  </li>
+              </ul>
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="comments">
+        <h2 class="is-size-4 title has-text-success"><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;Comments</h2>
+        <hr>
+        {% if comments %}
+          {% for comment in comments %}
+            <div class="media">
+                <p class="media-left"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i> </p>
+              <div class="media-content">
+                <div class="content" >
+                  <p>
+                    <strong>{{comment.name}}:</strong>{% if comment.is_admin ==1 %}<span class="has-text-warning">(admin)</span>{% endif %}
+                    <p id="{{comment.id}}">
+                        {{comment.content |raw}}
+                    </p>
+                    <span><a href="#comment_text" onClick="return CommentQuote('{{comment.id}}','{{comment.name}}')"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</a></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr>
+          {% endfor %}
+        {% endif %}
+
+        {% if not comments %}
+          <span class="is-size-5">(no comments...maybe you can be the first?)</span>
+        {% endif %}
+      </div>
+
+      <div class="media">
+        <div class="media-content">
+          <form id="comment_form" class="" action="/post/postComment" method="post">
+            <div class="field">
+              <label class="label">Name</label>
+              <p class="control">
+                <input id="comment_name" class="input has-text-light has-background-dark" name="user" type="text" placeholder="(name required)"  required="required">
+              </p>
+            </div>
+            <div class="field">
+              <label class="label">Email(Won't be public)</label>
+              <p class="control">
+                <input id="comment_email" class="input has-text-light has-background-dark" name="email" type="text" placeholder="(email, required)" required="required">
+              </p>
+            </div>
+            <div class="field">
+              <label class="label">You website(optional)</label>
+              <p class="control">
+                <input id="comment_site" class="input input has-text-light has-background-dark" name="site" type="text" placeholder="(not required)">
+              </p>
+            </div>
+          <div class="field">
+            <label class="label">Comment</label>
+            <p class="control">
+              <textarea id="comment_text" class="textarea input has-text-light has-background-dark" name="comment" placeholder="Add a comment :)" required="required"></textarea>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <input type="submit" class="button" value="Post!"></input>
+            </p>
+          </div>
+          <input type="hidden" name="pid" value="{{post.pid}}">
+          <input id="key" type="hidden" name="key" value="x">
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script type="text/javascript" src="/assets/comment.js"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+  </script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+
+  <!--BLOCK_POST_END-->
+  {% endblock %}

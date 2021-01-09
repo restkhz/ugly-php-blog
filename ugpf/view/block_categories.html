@@ -1,0 +1,64 @@
+{% extends 'block_skeleton.html' %}
+
+{% block title %}
+分类: {{cateName | e}}  | {{site.title | e }}
+{% endblock %}
+
+{% block body %}
+<!--BLOCK_CATEGORIES_START-->
+<section id="posts">
+    <div class="container">
+      <div class="columns" style="margin-bottom: 36px;">
+        <div class="column is-two-third">
+          <div class="card has-shadow-down">
+            <div class="card-header has-shadow-down">
+              <h1 class="card-header-title has-text-success is-size-5"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;[Category]:{{cateName | e}} </h1>
+            </div>
+            <div class="card-content">
+              <div class="content has-text-light">
+                <ul>
+                  {% for post in posts %}
+                  <li class="post">
+                    <time class="has-text-grey-light meta">[{{post.create_time|date('d/m/Y')}}]</time>
+                    <a href="/post/{{post.url}}">
+                      <p>{{post.title}}</p>
+                    </a>
+                    <div style="margin-left: auto;" class="is-hidden-touch">
+                        <p class="has-text-grey-light">{{categories[post.category_id].name}}</p>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+            <div class="card-footer">
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="column is-one-third is-hidden-touch">
+          <div class="card has-shadow-down">
+            <div class="card-header has-shadow-down">
+              <p class="card-header-title has-text-success is-size-5"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Categories</p>
+            </div>
+            <div class="card-content">
+              {% for category in categories %}
+              <ul class="menu-list">
+                  <li>
+                    <a href="/categories/{{category.name}}">{{category.name |e }}</a>
+                  </li>
+              </ul>
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+<!--BLOCK_CATEGORIES_END-->
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+    <title>Login</title>
+
+    <link href="assets/bulma-0.8.2/css/bulma.min.css" rel="stylesheet">
+    <link href="assets/costum.css" rel="stylesheet">
+    <link href="assets/costum.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="icon" href="assets/psb.jpeg">
+
+  </head>
+  <body>
+    <section class="hero is-fullheight is-dark">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+              <form class="" action="{{url}}" method="post">
+                <div class="field">
+                  <p clas="control">
+                    <input class="input is-large" type="text" name="user" placeholder="User">
+                  </p>
+                </div>
+
+                <div class="field">
+                  <p clas="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <input type="submit" class="is-success is-large button is-fullwidth" value="Login"></input>
+                  </p>
+                </div>
+              </form>
+            </div>
+        </div>
+
+      </div>
+    </section>
+  </body>
+</html>

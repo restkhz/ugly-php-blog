@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta name="author" content="休止千鹤">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="{% if post.description %}{{post.description}}{% endif %}">
+    <meta name="keywords" content="信息安全,树莓派,学习笔记,博客">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="/assets/bulma-0.8.2/css/bulma.min.css" rel="stylesheet">
+    <link href="/assets/costum.css" rel="stylesheet">
+    <link href="/assets/prism.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+    <!--<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">-->
+
+    <link rel="icon" href="/assets/psb.ico">
+
+  </head>
+  <body class="body">
+
+    {% block head %}
+        {{include('block_head.html')}}
+    {% endblock %}
+
+
+    {% block body %}
+    {% endblock %}
+
+
+    <section class="hero is-dark has-shadow-up" id="footer">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h5 class="subtitle is-6 is-size-7-touch">Designed and developed by 休止千鹤 Copyright ©  2016-2021 <a class="has-text-success" href="https://www.restkhz.com/">restkhz.com</a></h6>
+          <img src="/viewscounter/count?t=a" onerror="this.style.display='none'" width="1" height="1" alt="">    
+        </div>
+    </div>
+    </section>
+
+    <script type="text/javascript" src="/assets/costum.js"></script>
+    <script src="/assets/prism.js" ></script>
+
+  </body>
+</html>

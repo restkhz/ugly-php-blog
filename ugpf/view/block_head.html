@@ -1,0 +1,66 @@
+{% block head %}
+<!--BLOC_HEAD_START-->
+<section class="hero is-black is-medium">
+
+    <div class="hero-head">
+
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+
+              <a role="button" class="navbar-burger burger  has-text-success" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+              </a>
+          </div>
+
+          <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-start">
+                <a class="navbar-item" href="/">
+                  {{site.title}}
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link">
+                    Category
+                  </a>
+
+                  <div class="navbar-dropdown has-background-dark">
+                    {% for category in categories %}
+                    <a class="navbar-item" href="/categories/{{category.name}}">
+                      {{ category.name | e }}
+                    </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                {% for page in pages %}
+                  <a class="button is-black has-text-light" href="{{page.link}}">
+                    {{page.title}}
+                  </a>
+                {% endfor %}
+                  <a class="button is-dark  has-text-light" href="/mgmt/">
+                    Log in
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+    </div>
+    <div class="hero-body has-shadow-down">
+      <div class="container has-text-centered">
+        <span class="title is-size-2-desktop is-size-3-touch" style="display:inline-block;"> #></span>
+        <span class="title is-size-2-desktop is-size-3-touch" style="display:inline-block;">{{site.title|e}}</span>
+        <span id="blink" class="title is-size-2-desktop is-size-3-touch" style="display:inline-block;">_</span>
+        <p class="subtitle  is-size-6-touch">{{site.subtitle |e }}</p>
+      </div>
+  </div>
+</section>
+<!--BLOC_HEAD_END-->
+{% endblock %}
