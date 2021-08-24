@@ -75,6 +75,14 @@ class PostsModel extends Model
       return $this->select('url')->where('status',-1,'!=')->exec()->fetchAll(\PDO::FETCH_FUNC,array('\Model\PostsModel','prefix'));
     }
 
+    public function getView($pid) {
+      return $this->select('views')->where('pid', $pid[0])->exec()->fetch()[0];
+    }
+
+    public function getRSS() {
+      return ['posts' => $this->select('*')->exec()->fetchAll()];
+    }
+
     public function prefix($name) {return 'post/'.rawurlencode($name);}
     
 

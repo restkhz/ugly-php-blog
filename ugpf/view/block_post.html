@@ -28,7 +28,7 @@
                 {% endautoescape %}
               </div>
                 <hr>
-                <p><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;views:{{post.views}}</p>
+                <p><i class="fa fa-eye" aria-hidden="true"></i> Views: <span id="view"></span></p>
                 <img src="/viewscounter/postcount?pid={{post.pid}}&t=a" onerror="this.style.display='none'" width="1" height="1" alt="">
 
             </div>
@@ -104,7 +104,7 @@
               </p>
             </div>
             <div class="field">
-              <label class="label">You website(optional)</label>
+              <label class="label">Your website(optional)</label>
               <p class="control">
                 <input id="comment_site" class="input input has-text-light has-background-dark" name="site" type="text" placeholder="(not required)">
               </p>
@@ -135,6 +135,12 @@
       });
   </script>
   <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script type="text/javascript">
+      $(document).ready(function(){$('#view').load("/post/getView/{{post.pid}}");})
+  </script>
+
 
   <!--BLOCK_POST_END-->
   {% endblock %}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+    <channel>
+        <title>{{site.title | e }}</title>
+        <description>{{site.subtitle | e }}</description>
+        <icon>{{domainName}}favicon.ico</icon>
+        <link>{{domainName}}</link>
+        {% for post in posts %}
+            <item>
+                <title>{{post.title}}</title>
+                <pubDate>{{post.create_time}}</pubDate>
+                <link>{{domainName}}post/{{post.url}}</link>
+                <content:encoded>
+                    
+                    <![CDATA[{{post.content_html}}]]>
+                    
+                </content:encoded>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

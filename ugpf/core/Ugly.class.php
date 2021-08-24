@@ -76,9 +76,10 @@ namespace Ugly;
    protected static function _initView()
    {
        require UGLY_PATH.'/vendor/autoload.php';
-       $loader = new \Twig_Loader_Filesystem(self::$config['VIEW']);
-       self::$view = new \Twig_Environment($loader, array(
+       $loader = new \Twig\Loader\FilesystemLoader(self::$config['VIEW']);
+       self::$view = new \Twig\Environment($loader, array(
           'cache' => self::$config['CACHE_PATH'],
+          //'cache' => false,
           'debug' => true
         ));
 

@@ -66,6 +66,11 @@ class Post extends Controller
         }
     }
 
+    public function getView($pid) {
+        $pObj = new PostsModel;
+        echo $pObj -> getView($pid);
+    }
+
     public function init()
     {
       

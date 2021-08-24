@@ -55,10 +55,11 @@ class ErrorHandler
 
     }
 
-    public static function errHandler($no, $str, $file, $line, $context)
+    public static function errHandler($no, $file, $line, $context)
     {
         echo '<h1>We met an Error :</h1><br>';
-        echo '<b>'. $no . ' ' . $str .'</b><br>';
+        #echo '<b>'. $no . ' ' . $str .'</b><br>';
+        echo '<b>'. $no . ' ' . '</b><br>';
         echo 'at: '. $file .'<br>';
         echo 'Line: ' . $line. '<br><pre>';
         print_r($context);

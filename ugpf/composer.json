@@ -1,6 +1,5 @@
 {
-  "require":
-  {
-    "twig/twig":"2.0"
-  }
+    "require": {
+        "twig/twig": "^3.0"
+    }
 }

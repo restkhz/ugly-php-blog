@@ -17,7 +17,7 @@ function dev_check()
   }
 }
 
-function errHandler($no, $str, $file, $line, $context)
+function errHandler($no, $file, $line, $context)
 {
     dev_check();
     echo '<h1>We met an Error:</h1><br>';
